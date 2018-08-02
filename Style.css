@@ -1,0 +1,102 @@
+html {
+    min-height: 100%
+}
+
+body {
+	background: linear-gradient(pink, white); 
+}
+
+h1 {
+	font-family: 'Rozha One', serif;
+	letter-spacing: 5px;
+	color: white;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+
+}
+
+h3 {
+	font-family: 'Raleway', sans-serif;
+	letter-spacing: 6px;
+	color: white;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+}
+
+input {
+	font-family: 'Raleway', sans-serif;
+	margin: 2px;
+	padding: 12px;
+	width: 10%;
+	height: 10px;
+	border: none;
+}
+
+button {
+	font-family: 'Raleway', sans-serif;
+	width: 20%;
+	padding: 10px;
+	margin-top: 10px;
+	margin: 2px;
+	background-color: white;
+	border: none;
+}
+
+p {
+	margin: 0px;
+}
+
+#content {
+	margin: auto;
+	width: 50vh;
+	align-items: center;
+}
+
+#text {
+	margin: 50px;
+}
+
+#content button {
+	font-family: 'Raleway', sans-serif;
+	width: 100%;
+	padding: 10px;
+	margin-top: 10px;
+	background-color: white;
+	border: none;
+}
+
+#content input {
+	font-family: 'Raleway', sans-serif;
+	margin: 2px;
+	padding: 12px;
+	width: 40%;
+	border: none;
+}
+
+#items {
+	background-color: rgba(255, 255, 255, 0.4);
+	font-family: 'Raleway', sans-serif;
+	border: 1px solid white;
+	text-align: center;
+	margin: auto;
+	margin-bottom: 20px;
+	width: 40%;
+	padding: 10px;
+}
+
+#answer {
+	background-color: rgba(255, 255, 255, 0.4);
+	font-family: 'Raleway', sans-serif;
+	border: 1px solid white;
+	text-align: center;
+	margin: auto;
+	margin-bottom: 20px;
+	width: 40%;
+	padding: 10px;
+}
+
+#items text {
+	padding-bottom: 20px;
+}

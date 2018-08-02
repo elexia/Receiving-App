@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Receiving</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Raleway|Rozha+One" rel="stylesheet"> 
+</head>
+<body>
+
+<div id = "text">
+	<h1>Welcome to the Maido Receiving App!</h1>
+	<h3>Please input the number of items and price for each </h3>
+</div>
+
+<div id = "items"> Current Items :</div>
+
+<div id = "answer"> Current Total : </div>
+
+
+<div id="content">
+	<input class="input" type="number" id="numItems" placeholder="Number of items" tabindex=1>
+	<input class="input" type="number" id="priceItems" placeholder="Price per item" tabindex=2>
+	<br>
+	<button class="button" id="next" onclick="handleNext()" tabindex=3>next</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"> </script>
+
+<script>
+
+	// Prevents "tab" from going to browser-specified items
+	$('#next').keydown(function(e) {
+      if (e.keyCode == 9) {
+          $('#numItems').focus();
+          e.preventDefault();
+      }
+   });
+
+
+	var numItems = []
+	var priceItems = []
+	var itemsDiv = document.getElementById("items")
+	var answerDiv = document.getElementById("answer")
+
+	var ans = 0
+
+	function handleEditButton(event)
+	{
+			var index = event.target.id.slice(10)
+			
+			// Get the inputs
+			var numItemsInput = document.getElementById("numItemsTemp" + index)
+			var priceItemsInput = document.getElementById("priceItemsTemp" + index)
+
+			// Change the numbers in the arrays
+			var newNum = numItemsInput.value
+			var newPrice = priceItemsInput.value
+			numItems[index - 1] = newNum
+			priceItems[index - 1] = newPrice
+
+			// Change the numbers in the HTML
+			p = document.getElementById("p" + index)
+			p.innerHTML = newNum + " x " + newPrice + " = " + Math.round( newNum * newPrice * 100) / 100
+
+			// Remove all edit inputs & button
+			numItemsInput.remove()
+			priceItemsInput.remove()
+			document.getElementById("editButton" + index).remove()
+
+			// Display the new answer
+			document.getElementById("p" + index).style.display = "block"
+
+			// Update the answer
+			update()
+
+	}
+
+	function handleEdit(event)
+	{
+			// Hide original numbers
+			var p = event.target
+			p.style.display = "none"
+
+			var index = p.id.slice(1)
+			console.log(index)
+
+			// Create new div
+			var newDiv = document.createElement("div")
+			newDiv.id = "tempDiv"
+
+			// Create text boxes
+			var numItemsTemp = document.createElement("input")
+			numItemsTemp.id = "numItemsTemp" + index
+			numItemsTemp.setAttribute("type", "text")
+			numItemsTemp.value = numItems[index-1]
+
+			var priceItemsTemp = document.createElement("input")
+			priceItemsTemp.id = "priceItemsTemp" + index
+			priceItemsTemp.setAttribute("type", "text")
+			priceItemsTemp.value = priceItems[index-1]
+
+			// Create submit button
+			var button = document.createElement("button")
+			button.id = "editButton" + index
+			button.innerHTML = "Done"
+			button.onclick = handleEditButton
+
+			// Add all content to div
+			newDiv.appendChild(numItemsTemp)
+			newDiv.appendChild(priceItemsTemp)
+			newDiv.appendChild(button)
+
+			// Insert into itemsDiv div
+			itemsDiv.insertBefore(newDiv, p)
+
+	}
+
+	function handleNext(event)
+	{
+		var numItemsBox = document.getElementById("numItems")
+		var priceItemsBox = document.getElementById("priceItems")
+		var num = numItemsBox.value
+		var price = priceItemsBox.value
+
+		numItems.push(num)
+		priceItems.push(price)
+
+		//itemsDiv.innerHTML += "<br>" + num + " x " + price + " = " + Math.round( num * price * 100) / 100
+
+		// For each entry, create a p
+		var div = document.getElementById("items")
+		var p = document.createElement("p")
+		p.id = "p" + numItems.length
+		p.innerHTML = num + " x " + price + " = " + Math.round( num * price * 100) / 100
+		p.addEventListener("click", handleEdit); 
+
+		// Aooend the p to div, create click event to edit
+		div.appendChild(p) 		
+
+		update()
+
+	}
+
+	function update(){
+
+		// Changes current total
+		for(i = 0; i < numItems.length; i++)
+		{
+			ans += (numItems[i]) * (priceItems[i])
+		}
+		answerDiv.innerHTML = "Current Total: " + Math.round(ans * 100) / 100
+
+		ans = 0
+	}
+
+
+</script>
+</body>
+</html>
